@@ -1,4 +1,4 @@
-(ns drake-honeyql.core
+(ns drake.honeyql
   (:require [clojure.string :as str]
             [sosueme.conf :as conf]
             [cheshire.core :as json])
@@ -20,13 +20,11 @@
 (defn as-json-recs [facts]
   (map json/generate-string facts))
 
-(defn run-step [step]
+;;TODO: support authentication opts
+(defn honeyql [step]
   (let [sql       (str/join " " (:cmds step))
         json-recs (-> sql
                       run-honey
                       as-json-recs)
         output    (first (:outputs step))]
     (spit output (str/join "\n" json-recs))))
-
-(def STEP
-  {:cmds ["SELECT name, owner FROM restaurants WHERE owner IS NOT NULL"]})
