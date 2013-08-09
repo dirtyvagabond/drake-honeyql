@@ -11,11 +11,12 @@ This plugin has been deployed to Clojars. To use it, include the plugin in your 
 Then your Drake workflow can use the `honeyql` protocol to query Factual and store the results in your output file. E.g.:
 
 ```clojure
-starbucks.json <- [honeyql key:MYKEY secret:MYSECRET]
-  select name from places where name like 'starbuck%'
-
-restaurants.json <- [honeyql key:MYKEY secret:MYSECRET]
-  SELECT name, owner FROM restaurants WHERE owner IS NOT NULL
+restaurants.json <- [honeyql]
+  SELECT name, owner, address, price, attire
+    FROM restaurants
+    WHERE locality = 'los angeles'
+      AND owner IS NOT NULL
+      AND wifi = true
 ```
 
 ## Authentication
