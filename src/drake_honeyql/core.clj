@@ -21,15 +21,12 @@
   (map json/generate-string facts))
 
 (defn run-step [step]
-  (let [sql (str/join " " (:cmds step))
+  (let [sql       (str/join " " (:cmds step))
         json-recs (-> sql
                       run-honey
-                      as-json-recs)]
-    (println "RECS ----------------")
-    (clojure.pprint/pprint json-recs)
-    (println "---------------------")
-    (println "STEPS: --------------")
-    (clojure.pprint/pprint step)))
+                      as-json-recs)
+        output    (first (:outputs step))]
+    (spit output (str/join "\n" json-recs))))
 
 (def STEP
   {:cmds ["SELECT name, owner FROM restaurants WHERE owner IS NOT NULL"]})

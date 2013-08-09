@@ -1,4 +1,4 @@
-(defproject drake-honeyql "0.0.2"
+(defproject drake-honeyql "0.0.2-SNAPSHOT"
   :description "A Drake plugin for HoneyQL"
   :url "https://github.com/dirtyvagabond/drake-honeyql"
   :license {:name "Eclipse Public License"
