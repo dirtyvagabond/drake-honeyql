@@ -11,7 +11,7 @@ This plugin has been deployed to Clojars. To use it, include the plugin in your 
 Then your Drake workflow can use the `honeyql` protocol to query Factual and store the results in your output file. E.g.:
 
 ```clojure
-restaurants.json <- [honeyql]
+restaurants.json <- [honeyql key:MYKEY secret:MYSECRET]
   SELECT name, owner, address, price, attire
     FROM restaurants
     WHERE locality = 'los angeles'
@@ -21,4 +21,4 @@ restaurants.json <- [honeyql]
 
 ## Authentication
 
-Be sure you provide valid Factual API credentials via the step options. If you don't have a Factual API account yet, [it's free and easy to get one](https://www.factual.com/api-keys/request).
+Be sure you provide valid Factual API credentials via the step options, as key and secret. If you don't have a Factual API account yet, [it's free and easy to get one](https://www.factual.com/api-keys/request).
