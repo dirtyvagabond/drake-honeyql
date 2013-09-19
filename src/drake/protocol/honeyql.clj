@@ -1,4 +1,5 @@
-(ns drake.honeyql
+(ns drake.protocol.honeyql
+  (:use [drake-interface.core :only [Protocol]])
   (:require [clojure.string :as str]
             [sosueme.conf :as conf]
             [cheshire.core :as json])
@@ -34,7 +35,7 @@
 (defn as-json-recs [facts]
   (map json/generate-string facts))
 
-(defn honeyql
+(defn run-honeyql-step
   "Runs the HoneyQl statement in the step's body. Will use the auth
    specified in the step's :opts via :key and :secret if both are present,
    or will read the ~/.factual/factual-auth.yaml file."
@@ -47,3 +48,9 @@
                       as-json-recs)
         outfile   (first (:outputs step))]
     (spit outfile (str/join "\n" json-recs))))
+
+(defn honeyql []
+  (reify Protocol
+    (cmds-required? [_] true)
+    (run [_ step]
+      (run-honeyql-step step))))
